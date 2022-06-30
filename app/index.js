@@ -9,7 +9,7 @@ canvas.width = window.screen.width;
 canvas.height = window.screen.height;
 
 const background = new Image();
-background.src = "media/images/background.png";
+background.src = "media/images/background.webp";
 
 const playerBulletController = new BulletController(canvas, 10, "red", true);
 const enemyBulletController = new BulletController(canvas, 4, "white", false);
@@ -31,7 +31,7 @@ function game() {
     enemyController.draw(ctx);
     player.draw(ctx);
     playerBulletController.draw(ctx);
-    enemyBulletController.draw(ctx);
+    //enemyBulletController.draw(ctx);
   }
 }
 
