@@ -12,11 +12,15 @@ export default class BulletController {
 
     this.shootSound = new Audio("media/audios/hitting-basketball-ball.wav");
     this.shootSound.volume = 0.1;
+    this.gameInfo = document.getElementById('game-info')
   }
 
   draw(ctx) {
     this.bullets = this.bullets.filter(
-      (bullet) => bullet.y + bullet.width > 0 && bullet.y <= this.canvas.height
+      (bullet) => {
+        return (bullet.y + bullet.width > 0 && bullet.y <= this.canvas.height) &&
+               (bullet.x + bullet.height > 0 && bullet.x <= this.canvas.width)
+      }
     );
 
     this.bullets.forEach((bullet) => bullet.draw(ctx));
@@ -43,7 +47,7 @@ export default class BulletController {
       this.timeTillNextBulletAllowed <= 0 &&
       this.bullets.length < this.maxBulletsAtATime
     ) {
-      const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletColor);
+      const bullet = new Bullet(this.canvas, x, y, velocity, this.bulletColor, this.gameInfo.dataset.playerOrientation);
       this.bullets.push(bullet);
       if (this.soundEnabled) {
         this.shootSound.currentTime = 0;
